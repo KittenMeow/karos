@@ -2,25 +2,11 @@
 	global _isr%1
 	_isr%1:
         extern _isr_%1_handler
-		cli
+        cli
 		pushad
-        push ds
-        push es
-        push fs
-        push gs
-        mov ax, 0x10
-        mov ds, ax
-        mov es, ax
-        mov fs, ax
-        mov gs, ax
+        cld
         call _isr_%1_handler
-        pop eax
-        pop gs
-        pop fs
-        pop es
-        pop ds
         popad
-        add esp, 8
         iret
 %endmacro
 
@@ -28,25 +14,11 @@
 	global _isr%1
 	_isr%1:
         extern _isr_%1_handler
-		cli
-		pusha
-        push ds
-        push es
-        push fs
-        push gs
-        mov ax, 0x10
-        mov ds, ax
-        mov es, ax
-        mov fs, ax
-        mov gs, ax
+        cli
+		pushad
+        cld
         call _isr_%1_handler
-        pop eax
-        pop gs
-        pop fs
-        pop es
-        pop ds
-        popa
-        add esp, 8
+        popad
         iret
 %endmacro
 
@@ -55,25 +27,11 @@
 	global _irq%1
 	_irq%1:
         extern _irq_%1_handler
-		cli
-		pusha
-        push ds
-        push es
-        push fs
-        push gs
-        mov ax, 0x10
-        mov ds, ax
-        mov es, ax
-        mov fs, ax
-        mov gs, ax
+        cli
+		pushad
+        cld
         call _irq_%1_handler
-        pop eax
-        pop gs
-        pop fs
-        pop es
-        pop ds
-        popa
-        add esp, 8
+        popad
         iret
 %endmacro
 
